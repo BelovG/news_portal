@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="1346264674">
+    <data-source source="LOCAL" name="Rails news_portal: development" uuid="5c4d63b6-24a9-4372-9cb2-f3d8565a1145">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1/db_development</jdbc-url>
+      <user-name>username</user-name>
+      <user-password>dfd9dfcfdfc9dfd8dfcfdfde</user-password>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails news_portal: test" uuid="880c203f-3202-4340-91f0-a129c49395f3">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:db_test</jdbc-url>
+      <user-name>username</user-name>
+      <user-password>dfd9dfcfdfc9dfd8dfcfdfde</user-password>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails news_portal: production" uuid="31664791-eead-4a68-8f98-f9815e10859c">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:db_production</jdbc-url>
+      <user-name>username</user-name>
+      <user-password>dfd9dfcfdfc9dfd8dfcfdfde</user-password>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+
