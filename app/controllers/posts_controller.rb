@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
 
   def new
@@ -35,6 +35,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comments = @post.comments.with_state([:draft, :published])
   end
 
   def destroy

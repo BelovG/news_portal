@@ -10,3 +10,4 @@
         = i.title
 
   = link_to "Edit post", edit_post_path(@post)
+  = render partial: 'the_comments/tree', locals: { commentable: @post, comments_tree: @comments }

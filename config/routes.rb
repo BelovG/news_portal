@@ -9,7 +9,12 @@ NewsPortal::Application.routes.draw do
     get :business, on: :collection
     get :science, on: :collection
   end
-  
+
+  # TheComments routes
+  concern   :user_comments,  TheComments::UserRoutes.new
+  concern   :admin_comments, TheComments::AdminRoutes.new
+  resources :comments, concerns:  [:user_comments, :admin_comments]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

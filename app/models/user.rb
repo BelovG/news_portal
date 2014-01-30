@@ -10,4 +10,18 @@ class User < ActiveRecord::Base
                        format: { with: /\A[a-zA-Z0-9]+\Z/ },
                        length: {minimum: 3, maximum: 20}
 
+  include TheComments::User
+
+  def admin?
+    self == User.first
+  end
+
+  def comments_admin?
+    admin?
+  end
+
+  def comments_moderator? comment
+    id == comment.holder_id
+  end
+
 end

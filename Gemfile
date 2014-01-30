@@ -9,6 +9,11 @@ gem 'will_paginate' , '~> 3.0'
 gem 'bootstrap-will_paginate'
 gem 'pg'
 
+gem "the_comments", "~> 2.2.1"
+gem 'awesome_nested_set'
+gem 'haml'
+gem 'kaminari'
+
 
 
 # Use SCSS for stylesheets
