@@ -1,0 +1,17 @@
+#respond.comment-respond
+  h3#reply-title.comment-reply-title
+  = form_for(@post) do |f|
+    = f.label :title
+    = f.text_field :title, :autofocus => true
+
+    .field
+      = f.text_area :description, placeholder: "Compose description..."
+    .field
+      = f.text_area :content, placeholder: "Compose new post..."
+
+    - for category in @categories
+      div
+        = check_box_tag "post[category_ids][]", category.id, @post.categories.include?(category)
+        = category.title
+
+    = f.submit "Post", class: "btn btn-large btn-primary"

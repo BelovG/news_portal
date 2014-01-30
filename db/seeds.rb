@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Post.create(user_id: 1, title: 'Firs post',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipi',
+            content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ipsum nisi, facilisis at odio non, tristique porttitor sapien. Vestibulum vitae ligula a lacus varius faucibus eget gravida ipsum. Proin nibh eros, viverra et lectus vel, ultricies varius lacus. Etiam orci nisl, pulvinar at ultricies eget, faucibus et nulla. Pellentesque lacus est, malesuada consequat hendrerit id, posuere eget felis. Phasellus ac elit eu magna hendrerit adipiscing. Nullam vitae diam sit amet nulla tincidunt condimentum. In in velit porta, molestie risus sit amet, blandit arcu. Sed blandit porttitor nibh, at laoreet nulla rhoncus tincidunt. In ac est eu elit volutpat interdum vitae sed nunc. Aenean sed sodales nulla. Aenean dui libero, volutpat in orci eget, condimentum varius magna.')
+Category.create(title: "Policy")
+Category.create(title: "Sport")
+Category.create(title: "Culture")
+Category.create(title: "Business")
+Category.create(title: "Science")

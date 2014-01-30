@@ -2,6 +2,13 @@ NewsPortal::Application.routes.draw do
   devise_for :users
   root 'static_pages#home'
   match '/about',   to: 'static_pages#about',      via: 'get'
+  resources :posts do
+    get :policy, on: :collection
+    get :sport, on: :collection
+    get :culture, on: :collection
+    get :business, on: :collection
+    get :science, on: :collection
+  end
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

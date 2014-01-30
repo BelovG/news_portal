@@ -1,0 +1,12 @@
+.hero-unit
+  = @post.title
+  br
+  = @post.content
+  br
+  | In Categories:
+  - @post.categories.each do |i|
+    ul
+      li
+        = i.title
+
+  = link_to "Edit post", edit_post_path(@post)
