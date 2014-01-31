@@ -83,7 +83,12 @@ module RenderCommentsTreeHelper
       end
 
       def userbar
-        title  = @comment.title.blank? ? t('the_comments.guest_name') : @comment.title
+        #title  = @comment.title.blank? ? t('the_comments.guest_name') : @comment.title
+        if @comment.user_id.blank?
+          title = t('the_comments.guest_name')
+        else
+          title = User.find_by(id: @comment.user_id).username
+        end
         time = @comment.created_at.to_s(:ru_datetime)
         "<div class='userbar'>#{ title } &nbsp &nbsp &nbsp &nbsp #{ time } </div>"
       end

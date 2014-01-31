@@ -81,8 +81,8 @@
 
   li{
     .comment.draft{
-      border: 1px solid gray;
-      background: #eff5f3;
+      //border: 1px solid gray;
+      //background: #eff5f3;
       padding: 10px;
     }
   }
@@ -114,12 +114,12 @@
       padding: 3px;
     }
     .userbar{
-      background: #eff5f3;
+      background: #e0e4f5;
       border-radius: 3px;
       padding-left: 7px;
     }
     &.draft{
-      .userbar{ background: #ffa768; }
+      .userbar{ background: #eff5f3; }
       .to_draft{ display: none; }
     }
     &.published{
