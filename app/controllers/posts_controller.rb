@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-
+  load_and_authorize_resource except: [:create]
 
   def new
     @post = Post.new
@@ -9,6 +9,7 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    @categories = Category.all
     if @post.save
       flash[:success] = 'Post successfully created'
       redirect_to post_path(@post)

@@ -7,8 +7,11 @@
   ul
     - @post.categories.each do |i|
       li = i.title
-  if current_user == @post.user_id
-  = link_to "Edit post", edit_post_path(@post)
+  - if can? :update, @post
+    = link_to "Edit post", edit_post_path(@post)
+  br
+  - if can? :destroy, @post
+    = link_to "Destroy", @post, confirm: 'Are you sure?', method: :delete
   hr
   h3 Comments
   br
