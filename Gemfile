@@ -14,6 +14,7 @@ gem "the_comments", "~> 2.2.1"
 gem 'awesome_nested_set'
 gem 'haml'
 gem 'kaminari'
+gem 'activeadmin', github: 'gregbell/active_admin'
 
 
 
