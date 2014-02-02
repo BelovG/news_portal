@@ -1,0 +1,11 @@
+h1 Subscriptions
+.row
+  .span6.offset3
+    - @categories.each do |category|
+      #subscribe_form
+        - if current_user.subscribed?(category)
+          = render partial: 'unsubscribe', locals: {category: category}
+        - else
+          = render partial: 'subscribe', locals: {category: category}
+
+

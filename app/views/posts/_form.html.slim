@@ -13,5 +13,5 @@
       div
         = check_box_tag "post[category_ids][]", category.id, @post.categories.include?(category)
         = category.title
-
-    = f.submit "Post", class: "btn btn-large btn-primary"
+    br
+    = f.submit "Post", class: "btn btn-primary"

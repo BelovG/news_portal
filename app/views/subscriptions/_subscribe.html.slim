@@ -1,0 +1,5 @@
+= form_for(current_user.subscriptions.build(category_id: category.id)) do |f|
+  | #{category.title}
+  = f.hidden_field :category_id
+  = f.submit "Subscribe", class: "btn btn-primary pull-right"
+  hr

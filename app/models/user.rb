@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   include TheComments::User
   has_many :users_roles
   has_many :roles, :through => :users_roles
+  has_many :subscriptions
+  has_many :categories, :through => :subscriptions
   has_many :posts, dependent: :destroy
   before_create :create_role
 
@@ -16,6 +18,18 @@ class User < ActiveRecord::Base
 
   def admin?
     self.roles.include?(Role.find_by_name(:admin))
+  end
+
+  def subscribe(category)
+    self.categories << Category.find_by(title: category)
+  end
+
+  def unsubscribe(category)
+    self.categories >> Category.find_by(title: category)
+  end
+
+  def subscribed?(category)
+    self.subscriptions.find_by(category_id: category.id)
   end
 
   def comments_admin?

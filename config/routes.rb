@@ -10,7 +10,7 @@ NewsPortal::Application.routes.draw do
     get :business, on: :collection
     get :science, on: :collection
   end
-
+  resources :subscriptions, only: [:index, :create, :destroy]
   # TheComments routes
   concern   :user_comments,  TheComments::UserRoutes.new
   concern   :admin_comments, TheComments::AdminRoutes.new

@@ -27,6 +27,8 @@ header.navbar.navbar-fixed-top.navbar-inverse
           - if user_signed_in?
             li
               = link_to "New post", new_post_path
+            li
+              = link_to "Subscriptions", subscriptions_path
             li id="fat-menu" class="dropdown"
               a.dropdown-toggle data-toggle="dropdown" href="#"
                 i.icon-user
