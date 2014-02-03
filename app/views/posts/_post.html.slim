@@ -1,9 +1,11 @@
-.span4.alert-info.well
-  h3 = post.title
-  | #{post.description}
-  br
-  = link_to "Learn more >>", post_path(post), class: "btn"
+.row-fluid
+  .span8.well
+    h3
+      = link_to post.title, post_path(post)
+    | #{post.description}
+    br
+    = link_to "Learn more >>", post_path(post), class: "btn btn-mini pull-right"
 
 
-
+/.alert-info
 

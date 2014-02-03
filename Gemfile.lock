@@ -135,6 +135,10 @@ GEM
       polyamorous (~> 0.6.0)
     rdoc (4.1.1)
       json (~> 1.4)
+    redactor-rails (0.4.3)
+      devise
+      mime-types
+      orm_adapter
     redis (3.0.7)
     redis-namespace (1.4.1)
       redis (~> 3.0.4)
@@ -213,6 +217,7 @@ DEPENDENCIES
   kaminari
   pg
   rails (= 4.0.2)
+  redactor-rails
   sass-rails (~> 4.0.0)
   sdoc
   sidekiq

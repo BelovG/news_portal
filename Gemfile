@@ -16,6 +16,7 @@ gem 'haml'
 gem 'kaminari'
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'sidekiq'
+gem 'redactor-rails'
 
 
 # Use SCSS for stylesheets

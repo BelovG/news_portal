@@ -1,7 +1,7 @@
 .hero-unit
   h3 #{@post.title}
   br
-  | #{@post.content}
+  = raw @post.content
   br
   | In Categories:
   ul

@@ -7,7 +7,8 @@
     .field
       = f.text_area :description, placeholder: "Compose description..."
     .field
-      = f.text_area :content, placeholder: "Compose new post..."
+      /= f.text_area :content, placeholder: "Compose new post..."
+      = f.text_area :content, :class => "redactor", :rows => 40, :cols => 120
 
     - for category in @categories
       div
