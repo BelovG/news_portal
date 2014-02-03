@@ -10,8 +10,20 @@ ActiveAdmin.register Post do
     default_actions
   end
 
+  controller do
+    after_action :mail, only: :update
 
-  #after_update { mail_message }
+    private
+    def mail
+      post = Post.find(params[:id])
+      if post.approval
+        UserMailer.approval(post).deliver
+        post.subscription_mailer
+      else
+        UserMailer.disapproval(post).deliver
+      end
+    end
+  end
 
   form do |f|
     f.inputs "Approval" do

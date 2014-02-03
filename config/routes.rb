@@ -1,7 +1,7 @@
 NewsPortal::Application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
-  root 'static_pages#home'
+  root 'posts#index'
   match '/about',   to: 'static_pages#about',      via: 'get'
   resources :posts do
     get :policy, on: :collection

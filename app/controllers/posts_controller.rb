@@ -2,6 +2,11 @@ class PostsController < ApplicationController
   before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   load_and_authorize_resource except: [:create]
 
+  def index
+    @posts = Post.paginate(page: params[:page]).where('approval = true').order('created_at DESC')
+    @post = Post.first
+  end
+
   def new
     @post = Post.new
     @categories = Category.all
