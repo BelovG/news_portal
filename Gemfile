@@ -15,7 +15,7 @@ gem 'awesome_nested_set'
 gem 'haml'
 gem 'kaminari'
 gem 'activeadmin', github: 'gregbell/active_admin'
-
+gem 'sidekiq'
 
 
 # Use SCSS for stylesheets

@@ -15,13 +15,7 @@ ActiveAdmin.register Post do
 
     private
     def mail
-      post = Post.find(params[:id])
-      if post.approval
-        UserMailer.approval(post).deliver
-        post.subscription_mailer
-      else
-        UserMailer.disapproval(post).deliver
-      end
+      HardWorker.perform_async(params[:id])
     end
   end
 
