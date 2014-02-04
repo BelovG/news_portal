@@ -4,7 +4,6 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.paginate(page: params[:page]).where('approval = true').order('created_at DESC')
-    @post = Post.first
   end
 
   def new
@@ -51,34 +50,37 @@ class PostsController < ApplicationController
   end
 
   def policy
-    @posts = Category.find_by(title: "Policy").posts.paginate(page: params[:page])
-    render 'static_pages/home'
+    find_posts_categories("Policy")
+    render 'posts/index'
   end
 
   def sport
-    @posts = Category.find_by(title: "Sport").posts.paginate(page: params[:page])
-    render 'static_pages/home'
+    find_posts_categories("Sport")
+    render 'posts/index'
   end
 
   def culture
-    @posts = Category.find_by(title: "Culture").posts.paginate(page: params[:page])
-    render 'static_pages/home'
+    find_posts_categories("Culture")
+    render 'posts/index'
   end
 
   def business
-    @posts = Category.find_by(title: "Business").posts.paginate(page: params[:page])
-    render 'static_pages/home'
+    find_posts_categories("Business")
+    render 'posts/index'
   end
 
   def science
-    @posts = Category.find_by(title: "Science").posts.paginate(page: params[:page])
-    render 'static_pages/home'
+    find_posts_categories("Science")
+    render 'posts/index'
   end
 
   private
 
-  def post_params
-    params.require(:post).permit(:title, :description, :content, :approval, :category_ids => []).merge!(user_id: current_user.id)
-  end
+    def find_posts_categories(category)
+      @posts = Category.find_by(title: category).posts.paginate(page: params[:page])
+    end
 
+    def post_params
+      params.require(:post).permit(:title, :description, :content, :approval, :category_ids => []).merge!(user_id: current_user.id)
+    end
 end

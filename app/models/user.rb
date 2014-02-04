@@ -39,12 +39,13 @@ class User < ActiveRecord::Base
     id == comment.holder_id
   end
 
+  #Number of users registrated today
   scope :joined_within_one_days, -> { where('created_at >= :five_days_ago',
         :five_days_ago => Time.now.beginning_of_day,) }
 
   private
-  def create_role
-    self.roles << Role.find_by_name(:user)
-  end
-
+    #add a new user role
+    def create_role
+      self.roles << Role.find_by_name(:user)
+    end
 end

@@ -7,11 +7,10 @@
     .field
       = f.text_area :description, placeholder: "Compose description..."
     .field
-      /= f.text_area :content, placeholder: "Compose new post..."
-      = f.text_area :content, :class => "redactor", :rows => 40, :cols => 120
-
+      = f.text_area :content, :class => "redactor", :rows => 40, :cols => 120, placeholder: "Compose new post..."
+    br
     - for category in @categories
-      div
+      .checkbox
         = check_box_tag "post[category_ids][]", category.id, @post.categories.include?(category)
         = category.title
     br

@@ -1,14 +1,16 @@
 .hero-unit
-  h3 #{@post.title}
+  .center
+    h3 #{@post.title}
   br
   = raw @post.content
   br
+  hr
   | In Categories:
   ul
     - @post.categories.each do |i|
       li = i.title
   - if can? :update, @post
-    = link_to "Edit post", edit_post_path(@post)
+    = link_to "Edit", edit_post_path(@post)
   br
   - if can? :destroy, @post
     = link_to "Destroy", @post, confirm: 'Are you sure?', method: :delete

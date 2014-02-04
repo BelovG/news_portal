@@ -3,11 +3,11 @@ class Post < ActiveRecord::Base
   has_and_belongs_to_many :categories
   belongs_to :user
   validates :user_id,     presence: true
-  validates :title,       presence: true, length: { maximum: 50 }
-  validates :description, presence: true, length: { maximum: 140 }
-  validates :content,     presence: true, length: { maximum: 2000 }
+  validates :title,       presence: true, length: { maximum: 100 }
+  validates :description, presence: true, length: { maximum: 400 }
+  validates :content,     presence: true, length: { maximum: 4000 }
 
-  # subscription_mailer fetches the users who need to send a mail
+  # "subscription_mailer" fetches the users who need to send a mail
   # I think that this code smells. I will do that later.
   def subscription_mailer
     user_ids = Subscription.where('category_id in (?)', self.categories.ids).distinct.pluck(:user_id)
@@ -18,7 +18,6 @@ class Post < ActiveRecord::Base
   end
 
   # Denormalization methods
-  # Please, read about advanced using
   def commentable_title
     "Undefined Post Title"
   end
