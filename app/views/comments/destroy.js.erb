@@ -1,0 +1,1 @@
+$("#comments").html("<%= escape_javascript(render partial: 'the_comments/tree', locals: { commentable: @post, comments_tree: @comments }) %>")

@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_filter :authenticate_user!, only: [:destroy]
+  load_and_authorize_resource except: [:create]
   # layout 'admin'
 
   # Define your restrict methods and use them like this:
@@ -8,6 +10,18 @@ class CommentsController < ApplicationController
   # before_action :admin_required, only:   %w[total_draft total_published total_deleted total_spam]
   
   include TheComments::Controller
+
+  def destroy
+    comment = Comment.find(params[:id])
+    @post = comment.commentable
+    @comments = @post.comments.with_state([:draft, :published])
+    comment.destroy
+    flash[:success] = 'Comment deleted'
+    respond_to do |format|
+      format.html { redirect_to post_path(@post) }
+      format.js
+    end
+  end
 
   # >>> include TheComments::Controller <<<
   # (!) Almost all methods based on *current_user* method

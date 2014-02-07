@@ -17,4 +17,5 @@
   hr
   h3 Comments
   br
-  = render partial: 'the_comments/tree', locals: { commentable: @post, comments_tree: @comments }
+  #comments
+    = render partial: 'the_comments/tree', locals: { commentable: @post, comments_tree: @comments }
