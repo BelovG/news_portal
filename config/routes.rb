@@ -1,9 +1,11 @@
 NewsPortal::Application.routes.draw do
+  mount RedactorRails::Engine => '/redactor_rails'
   ActiveAdmin.routes(self)
   devise_for :users
   root 'posts#index'
   match '/about',   to: 'static_pages#about',      via: 'get'
   resources :posts do
+    get :send_email, on: :member
     get :policy, on: :collection
     get :sport, on: :collection
     get :culture, on: :collection

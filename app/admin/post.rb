@@ -10,13 +10,18 @@ ActiveAdmin.register Post do
     default_actions
   end
 
-  controller do
-    after_action :mail, only: :update
+  sidebar "Send approval by email", :only => :show do
+    @post = Post.find(params[:id])
+    render "posts/admin_sidebar"
+  end
 
-    private
-    def mail
-      HardWorker.perform_async(params[:id])
-    end
+  controller do
+    #after_action :mail, only: :update
+
+    #private
+    #def mail
+    #  HardWorker.perform_async(params[:id])
+    #end
   end
 
   form do |f|

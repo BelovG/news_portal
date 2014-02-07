@@ -1,4 +1,5 @@
 class UserMailer < ActionMailer::Base
+  include Sidekiq::Mailer
   default from: "admin@example.com"
 
   def approval(post)

@@ -39,14 +39,32 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
-    @comments = @post.comments.with_state([:draft, :published])
+    if Post.find(params[:id]).approval
+      @post = Post.find(params[:id])
+      @comments = @post.comments.with_state([:draft, :published])
+    else
+      render 'posts/not_approved'
+    end
   end
 
   def destroy
     Post.find(params[:id]).destroy
     flash[:success] = 'Post deleted'
     redirect_to root_path
+  end
+
+  def send_email
+    post = Post.find(params[:id])
+
+    #post = Post.find(post_id)
+    if post.approval
+      UserMailer.approval(post).deliver
+      post.subscription_mailer
+    else
+      UserMailer.disapproval(post).deliver
+    end
+    #HardWorker.perform_async(params[:id])
+    redirect_to admin_posts_path
   end
 
   def policy
