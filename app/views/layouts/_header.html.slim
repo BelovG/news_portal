@@ -15,15 +15,15 @@ header.navbar.navbar-fixed-top.navbar-inverse
               li
                 = link_to "All posts", root_path
               li
-                = link_to "Policy", policy_posts_path
+                = link_to "Policy", category_posts_path('policy')
               li
-                = link_to "Sport", sport_posts_path
+                = link_to "Sport", category_posts_path('sport')
               li
-                = link_to "Culture", culture_posts_path
+                = link_to "Culture", category_posts_path('culture')
               li
-                = link_to "Business", business_posts_path
+                = link_to "Business", category_posts_path('business')
               li
-                = link_to "Science", science_posts_path
+                = link_to "Science", category_posts_path('science')
           - if user_signed_in?
             li
               = link_to "New post", new_post_path

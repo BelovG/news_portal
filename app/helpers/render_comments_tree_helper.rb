@@ -108,7 +108,7 @@ module RenderCommentsTreeHelper
       def delete
         if controller.try(:user_signed_in?)
           if controller.try(:current_user).admin?
-            h.link_to "Delete", @comment ,:confirm => 'Are you sure?', class: :edit, method: :delete, :remote => true
+            h.link_to "Delete", @comment ,:confirm => 'Are you sure?', method: :delete, :remote => true, class: :edit
           end
         end
       end

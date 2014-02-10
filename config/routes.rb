@@ -3,15 +3,12 @@ NewsPortal::Application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
   root 'posts#index'
-  match '/about',   to: 'static_pages#about',      via: 'get'
+  match '/about', to: 'static_pages#about', via: 'get'
   resources :posts do
     get :send_email, on: :member
-    get :policy, on: :collection
-    get :sport, on: :collection
-    get :culture, on: :collection
-    get :business, on: :collection
-    get :science, on: :collection
+    get '/category/:slug' => :category, on: :collection, as: 'category'
   end
+
   resources :subscriptions, only: [:index, :create, :destroy]
   # TheComments routes
   concern   :user_comments,  TheComments::UserRoutes.new

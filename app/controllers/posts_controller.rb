@@ -53,51 +53,24 @@ class PostsController < ApplicationController
     redirect_to root_path
   end
 
+  def category
+    category = Category.find_by(title: params[:slug])
+    @posts = category.posts.paginate(page: params[:page]).where('approval = true').order('created_at DESC')
+    render 'posts/index'
+  end
+
   def send_email
     post = Post.find(params[:id])
-
-    #post = Post.find(post_id)
     if post.approval
-      UserMailer.approval(post).deliver
+      UserMailer.delay.approval(post.id)
       post.subscription_mailer
     else
-      UserMailer.disapproval(post).deliver
+      UserMailer.delay.disapproval(post.id)
     end
-    #HardWorker.perform_async(params[:id])
     redirect_to admin_posts_path
   end
 
-  def policy
-    find_posts_categories("Policy")
-    render 'posts/index'
-  end
-
-  def sport
-    find_posts_categories("Sport")
-    render 'posts/index'
-  end
-
-  def culture
-    find_posts_categories("Culture")
-    render 'posts/index'
-  end
-
-  def business
-    find_posts_categories("Business")
-    render 'posts/index'
-  end
-
-  def science
-    find_posts_categories("Science")
-    render 'posts/index'
-  end
-
   private
-
-    def find_posts_categories(category)
-      @posts = Category.find_by(title: category).posts.paginate(page: params[:page])
-    end
-
     def post_params
       params.require(:post).permit(:title, :description, :content, :approval, :category_ids => []).merge!(user_id: current_user.id)
     end

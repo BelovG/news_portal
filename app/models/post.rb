@@ -13,7 +13,7 @@ class Post < ActiveRecord::Base
     user_ids = Subscription.where('category_id in (?)', self.categories.ids).distinct.pluck(:user_id)
     subscribed_users = User.find(user_ids)
     subscribed_users.each do |user|
-      UserMailer.subscription(user, self).deliver
+      UserMailer.delay.subscription(user.id, self.id)
     end
   end
 

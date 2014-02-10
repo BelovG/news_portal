@@ -9,7 +9,7 @@ class Ability
       can :read, :all
       can :create, Comment
       can :update, Comment, :user_id => user.id
-      can [:create, :policy, :sport, :culture, :business, :science], Post
+      can [:create, :category], Post
       can :update, Post, :user_id => user.id
     end
   end

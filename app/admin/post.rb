@@ -12,7 +12,7 @@ ActiveAdmin.register Post do
 
   sidebar "Send approval by email", :only => :show do
     @post = Post.find(params[:id])
-    render "posts/admin_sidebar"
+    render "admin/admin_sidebar"
   end
 
   controller do

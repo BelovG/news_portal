@@ -15,8 +15,7 @@ gem 'awesome_nested_set'
 gem 'haml'
 gem 'kaminari'
 gem 'activeadmin', github: 'gregbell/active_admin'
-#gem 'sidekiq', "~> 0,6"
-gem 'sidekiq-mailer'
+gem 'sidekiq'
 gem 'redactor-rails'
 gem "carrierwave"
 gem "mini_magick"
