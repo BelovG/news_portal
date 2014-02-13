@@ -12,8 +12,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :username, uniqueness: { :case_sensitive => false },
-                       format: { with: /\A[a-zA-Z0-9]+\Z/ },
+  validates :username, presence: true,
+                       format: { with: /\A[a-zA-Z0-9]+\Z/,
+                       message: "^Name must contain only letters and digits." },
                        length: {minimum: 3, maximum: 20}
 
   def admin?
@@ -37,6 +38,29 @@ class User < ActiveRecord::Base
 
   def comments_moderator? comment
     id == comment.holder_id
+  end
+
+  # Access token for a user
+  def access_token
+    User.create_access_token(self)
+  end
+
+  # Verifier based on our application secret
+  def self.verifier
+    ActiveSupport::MessageVerifier.new(NewsPortal::Application.config.secret_key_base)
+  end
+
+  # Get a user from a token
+  def self.read_access_token(signature)
+    id = verifier.verify(signature)
+    User.find_by_id id
+  rescue ActiveSupport::MessageVerifier::InvalidSignature
+    nil
+  end
+
+  # Class method for token generation
+  def self.create_access_token(user)
+    verifier.generate(user.id)
   end
 
   #Number of users registrated today

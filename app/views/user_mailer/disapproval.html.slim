@@ -8,4 +8,5 @@ html
       br
       | Your post is not approved!
       br
-      | Fix it at this link: #{edit_post_url(@post)}
+      | Fix it at this link:
+      = link_to "Edit your post", edit_post_url(@post)

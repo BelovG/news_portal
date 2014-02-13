@@ -9,4 +9,18 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-NewsPortal::Application.config.secret_key_base = '3082f8686c6732eb5b3fffc8a42ac3a1729171323f31213402d90b98e2e73c4b3f2304f21742c9cf0b77bd5a571c49d67f77f5fcd569d8f0f439225204f42e25'
+require 'securerandom'
+
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    # Use the existing token.
+    File.read(token_file).chomp
+  else
+    # Generate a new token and store it in token_file.
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+NewsPortal::Application.config.secret_key_base = secure_token

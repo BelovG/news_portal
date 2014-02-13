@@ -2,6 +2,7 @@ NewsPortal::Application.routes.draw do
   mount RedactorRails::Engine => '/redactor_rails'
   ActiveAdmin.routes(self)
   devise_for :users
+  match '/users/unsubscribe/:signature' => 'users#unsubscribe', as: 'unsubscribe', via: 'get'
   root 'posts#index'
   match '/about', to: 'static_pages#about', via: 'get'
   resources :posts do

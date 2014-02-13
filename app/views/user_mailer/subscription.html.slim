@@ -10,4 +10,5 @@ html
       br
       | #{@post.description}
       br
-      | You can unsubscribe link: #{subscriptions_url}
+      | You can unsubscribe link:
+      = link_to "Unsubscribe", unsubscribe_url(@user.access_token)

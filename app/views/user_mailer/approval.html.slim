@@ -8,4 +8,5 @@ html
       br
       | Your post is ok! =)
       br
-      | Link: #{post_url(@post)}
+      | Link:
+      = link_to "Your post", post_url(@post)
