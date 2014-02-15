@@ -16,7 +16,7 @@ class CommentsController < ApplicationController
     @post = comment.commentable
     @comments = @post.comments.with_state([:draft, :published])
     comment.destroy
-    flash[:success] = 'Comment deleted'
+    flash.now[:success] = 'Comment deleted'
     respond_to do |format|
       format.html { redirect_to post_path(@post) }
       format.js

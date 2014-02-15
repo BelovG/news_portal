@@ -1,19 +1,20 @@
 class PostsController < ApplicationController
-  before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :send_email]
+  before_filter :get_posts, only: [:category, :destroy]
+  before_filter :find_post, only: [:edit, :update, :show, :destroy, :send_email]
+  before_filter :get_categories, only: [:new, :create, :edit]
   load_and_authorize_resource except: [:create]
 
-  def index
-    @posts = Post.paginate(page: params[:page]).where('approval = true').order('created_at DESC')
+  def category
+    render 'posts/index'
   end
 
   def new
     @post = Post.new
-    @categories = Category.all
   end
 
   def create
     @post = Post.new(post_params)
-    @categories = Category.all
     if @post.save
       flash[:success] = 'Post successfully created'
       redirect_to post_path(@post)
@@ -23,13 +24,10 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
-    @categories = Category.all
   end
 
   def update
     params[:post][:category_ids] ||= []
-    @post = Post.find(params[:id])
     if @post.update_attributes(post_params)
       flash[:success] = 'Post successfully updated!'
       redirect_to post_path(@post)
@@ -39,8 +37,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    if Post.find(params[:id]).approval
-      @post = Post.find(params[:id])
+    if @post.approval
       @comments = @post.comments.with_state([:draft, :published])
     else
       render 'posts/not_approved'
@@ -48,26 +45,39 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    Post.find(params[:id]).destroy
-    flash[:success] = 'Post deleted'
-    redirect_to root_path
-  end
-
-  def category
-    category = Category.find_by(title: params[:slug])
-    @posts = category.posts.paginate(page: params[:page]).where('approval = true').order('created_at DESC')
-    render 'posts/index'
+    @post.destroy
+    flash.now[:success] = 'Post deleted'
+    respond_to do |format|
+      format.js
+    end
   end
 
   def send_email
-    post = Post.find(params[:id])
-    if post.approval
-      UserMailer.delay.approval(post.id)
-      post.subscription_mailer
+    if @post.approval
+      UserMailer.delay.approval(@post.id)
+      @post.subscription_mailer
     else
-      UserMailer.delay.disapproval(post.id)
+      UserMailer.delay.disapproval(@post.id)
     end
     redirect_to admin_posts_path
+  end
+
+  # Before_filters
+  def get_posts
+    if params[:slug]
+      category = Category.find_by(title: params[:slug])
+      @posts = category.posts.paginate(page: params[:page]).where('approval = true').order('created_at DESC')
+    else
+      @posts = Post.paginate(page: params[:page]).where('approval = true').order('created_at DESC')
+    end
+  end
+
+  def find_post
+    @post = Post.find(params[:id])
+  end
+
+  def get_categories
+    @categories = Category.all
   end
 
   private

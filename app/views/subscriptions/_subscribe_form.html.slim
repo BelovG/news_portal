@@ -1,0 +1,5 @@
+- @categories.each do |category|
+  - if current_user.subscribed?(category)
+    = render partial: 'unsubscribe', locals: {category: category}
+  - else
+    = render partial: 'subscribe', locals: {category: category}

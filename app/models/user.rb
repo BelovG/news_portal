@@ -40,6 +40,11 @@ class User < ActiveRecord::Base
     id == comment.holder_id
   end
 
+  # Number of users registrated today
+  scope :joined_within_one_days, -> { where('created_at >= :five_days_ago',
+        :five_days_ago => Time.now.beginning_of_day,) }
+
+  ### Unsubscribe from the mailing ###
   # Access token for a user
   def access_token
     User.create_access_token(self)
@@ -62,10 +67,6 @@ class User < ActiveRecord::Base
   def self.create_access_token(user)
     verifier.generate(user.id)
   end
-
-  #Number of users registrated today
-  scope :joined_within_one_days, -> { where('created_at >= :five_days_ago',
-        :five_days_ago => Time.now.beginning_of_day,) }
 
   private
     #add a new user role

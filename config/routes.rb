@@ -3,7 +3,7 @@ NewsPortal::Application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
   match '/users/unsubscribe/:signature' => 'users#unsubscribe', as: 'unsubscribe', via: 'get'
-  root 'posts#index'
+  root 'posts#category'
   match '/about', to: 'static_pages#about', via: 'get'
   resources :posts do
     get :send_email, on: :member

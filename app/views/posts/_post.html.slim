@@ -5,5 +5,7 @@
     | #{post.description}
     br
     = link_to "Learn more >>", post_path(post), class: "btn btn-mini pull-right"
+    - if can? :destroy, post
+      = link_to "Destroy", post_path(post, slug: params[:slug]), data: {confirm: 'Are you sure?'}, method: :delete, remote: true
 
 

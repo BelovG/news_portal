@@ -15,15 +15,6 @@ ActiveAdmin.register Post do
     render "admin/admin_sidebar"
   end
 
-  controller do
-    #after_action :mail, only: :update
-
-    #private
-    #def mail
-    #  HardWorker.perform_async(params[:id])
-    #end
-  end
-
   form do |f|
     f.inputs "Approval" do
       f.input :title
