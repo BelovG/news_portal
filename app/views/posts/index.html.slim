@@ -1,5 +1,8 @@
 .row-fluid
-  .span8.offset2#posts
+  .span8#posts
     = render @posts
     = will_paginate @posts
+  .span4.well.sidebar-nav
+    = render 'sidebar'
+
 

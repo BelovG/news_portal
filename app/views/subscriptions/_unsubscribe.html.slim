@@ -1,4 +1,8 @@
 = form_for(current_user.subscriptions.find_by(category_id: category),html: { method: :delete }, remote: true) do |f|
-  | #{category.title}
-  = f.submit "Unsubscribe", class: "btn btn-success pull-right"
+  .row-fluid
+    .span6
+      .subscriptions
+        = category.title.capitalize
+    .span5.offset1
+      = f.submit "Unsubscribe", class: "btn btn-success pull-right btn-block"
   hr

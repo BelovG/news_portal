@@ -1,5 +1,9 @@
 = form_for(current_user.subscriptions.build(category_id: category.id), remote: true) do |f|
-  | #{category.title}
-  = f.hidden_field :category_id
-  = f.submit "Subscribe", class: "btn btn-primary pull-right"
+  .row-fluid
+    .span6
+      .subscriptions
+        = category.title.capitalize
+    .span5.offset1
+      = f.hidden_field :category_id
+      = f.submit "Subscribe", class: "btn btn-primary pull-right btn-block"
   hr

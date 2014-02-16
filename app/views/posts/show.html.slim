@@ -8,7 +8,7 @@
   | In Categories:
   ul
     - @post.categories.each do |i|
-      li = i.title
+      li = i.title.capitalize
   - if can? :update, @post
     = link_to "Edit", edit_post_path(@post)
   hr

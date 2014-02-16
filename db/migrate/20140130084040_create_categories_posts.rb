@@ -4,5 +4,7 @@ class CreateCategoriesPosts < ActiveRecord::Migration
       t.integer :category_id
       t.integer :post_id
     end
+    add_index :categories_posts, :post_id
+    add_index :categories_posts, :category_id
   end
 end

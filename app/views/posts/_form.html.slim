@@ -12,6 +12,6 @@
     - for category in @categories
       .checkbox
         = check_box_tag "post[category_ids][]", category.id, @post.categories.include?(category)
-        = category.title
+        = category.title.capitalize
     br
     = f.submit "Post", class: "btn btn-primary"

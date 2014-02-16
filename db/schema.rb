@@ -37,10 +37,15 @@ ActiveRecord::Schema.define(version: 20140205131725) do
     t.datetime "updated_at"
   end
 
+  add_index "categories", ["title"], name: "index_categories_on_title", using: :btree
+
   create_table "categories_posts", id: false, force: true do |t|
     t.integer "category_id"
     t.integer "post_id"
   end
+
+  add_index "categories_posts", ["category_id"], name: "index_categories_posts_on_category_id", using: :btree
+  add_index "categories_posts", ["post_id"], name: "index_categories_posts_on_post_id", using: :btree
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -70,6 +75,8 @@ ActiveRecord::Schema.define(version: 20140205131725) do
     t.datetime "updated_at"
   end
 
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
+
   create_table "posts", force: true do |t|
     t.string   "title"
     t.string   "description"
@@ -83,7 +90,7 @@ ActiveRecord::Schema.define(version: 20140205131725) do
     t.integer  "deleted_comments_count",   default: 0
   end
 
-  add_index "posts", ["user_id", "created_at"], name: "index_posts_on_user_id_and_created_at", using: :btree
+  add_index "posts", ["created_at", "approval", "user_id"], name: "index_posts_on_created_at_and_approval_and_user_id", using: :btree
 
   create_table "redactor_assets", force: true do |t|
     t.integer  "user_id"
@@ -107,6 +114,8 @@ ActiveRecord::Schema.define(version: 20140205131725) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "subscriptions", force: true do |t|
     t.integer  "user_id"
@@ -141,6 +150,7 @@ ActiveRecord::Schema.define(version: 20140205131725) do
     t.integer  "spam_comcoms_count",          default: 0
   end
 
+  add_index "users", ["created_at"], name: "index_users_on_created_at", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree

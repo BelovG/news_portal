@@ -3,10 +3,11 @@ html
   head
     meta content="text/html; charset=UTF-8" http-equiv="Content-Type"
   body
-    h1
+    h3
       | Hi, #{@user.username}
       br
       | Your post is ok! =)
       br
+    h4
       | Link:
       = link_to "Your post", post_url(@post)

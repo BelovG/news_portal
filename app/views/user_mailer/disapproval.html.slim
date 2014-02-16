@@ -3,10 +3,11 @@ html
   head
     meta content="text/html; charset=UTF-8" http-equiv="Content-Type"
   body
-    h1
+    h3
       | Hi, #{@user.username}
       br
       | Your post is not approved!
       br
+    h4
       | Fix it at this link:
       = link_to "Edit your post", edit_post_url(@post)
