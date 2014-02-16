@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
@@ -13,6 +14,7 @@ gem 'will_paginate' , '~> 3.0'
 gem 'bootstrap-will_paginate'
 gem 'pg'
 
+
 gem "the_comments", "~> 2.2.1"
 gem 'awesome_nested_set'
 gem 'haml'
@@ -23,7 +25,9 @@ gem 'redactor-rails'
 gem "carrierwave"
 gem "mini_magick"
 
-
+group :production do
+  gem 'rails_12factor', '0.0.2'
+end
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
