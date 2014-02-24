@@ -1,4 +1,10 @@
 form.filter_form
   .buttons
-    h3.center
-      = link_to 'Send Email', send_email_post_path(@post), class: "clear_filters_btn"
+    - if @post.approval.nil?
+      = render partial: 'admin/approve'
+      = render partial: 'admin/disapprove'
+    - elsif @post.approval
+      = render partial: 'admin/disapprove'
+    - else
+      = render partial: 'admin/approve'
+

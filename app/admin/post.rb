@@ -15,12 +15,23 @@ ActiveAdmin.register Post do
     render "admin/admin_sidebar"
   end
 
+  member_action :approval, :method => :put do
+    post = Post.find(params[:id])
+    post.update_attribute(:approval, params[:approval])
+    if post.approval
+      UserMailer.delay.approval(post.id)
+      post.subscription_mailer
+    else
+      UserMailer.delay.disapproval(post.id)
+    end
+    redirect_to admin_posts_path
+  end
+
   form do |f|
     f.inputs "Approval" do
       f.input :title
       f.input :description
       f.input :content
-      f.input :approval
     end
     f.actions
   end

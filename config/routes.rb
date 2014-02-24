@@ -6,7 +6,7 @@ NewsPortal::Application.routes.draw do
   root 'posts#category'
   match '/about', to: 'static_pages#about', via: 'get'
   resources :posts do
-    get :send_email, on: :member
+    #get :send_email, on: :member
     get '/category/:slug' => :category, on: :collection, as: 'category'
   end
 

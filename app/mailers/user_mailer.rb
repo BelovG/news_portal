@@ -12,8 +12,15 @@ class UserMailer < ActionMailer::Base
     mail(to: @user.email, subject: 'Disapproval!')
   end
 
-  def subscription(user_id, post_id)
-    @user, @post = User.find(user_id), Post.find(post_id)
+  def subscription(users_id, post_id)
+    users, post = User.find(users_id), Post.find(post_id)
+    users.each do |user|
+      subscription_mailer(user, post)
+    end
+  end
+
+  def subscription_mailer(user, post)
+    @user, @post = user, post
     mail(to: @user.email, subject: 'New Post!')
   end
 

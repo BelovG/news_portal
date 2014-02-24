@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
-  before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :send_email]
+  before_filter :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_filter :get_posts, only: [:category, :destroy]
-  before_filter :find_post, only: [:edit, :update, :show, :destroy, :send_email]
+  before_filter :find_post, only: [:edit, :update, :show, :destroy]
   before_filter :get_categories, only: [:new, :create, :edit]
   load_and_authorize_resource except: [:create]
 
@@ -50,16 +50,6 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.js
     end
-  end
-
-  def send_email
-    if @post.approval
-      UserMailer.delay.approval(@post.id)
-      @post.subscription_mailer
-    else
-      UserMailer.delay.disapproval(@post.id)
-    end
-    redirect_to admin_posts_path
   end
 
   # Before_filters
